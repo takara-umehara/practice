@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\PostRequest; // useする
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostController extends Controller
 {
@@ -40,5 +41,11 @@ class PostController extends Controller
         $post->fill($input_post)->save();
 
         return redirect('/posts/' . $post->id);
+    }
+
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/');
     }
 }
